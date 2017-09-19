@@ -1,0 +1,40 @@
+<!-- // Scoped styles -->
+<style>
+  .child {
+    border: 2px solid red;
+  }
+</style>
+
+
+<!--// Template -->
+<div class="child" style="border-color:{{ colour }}">
+  <button type="button" name="button" on:click="colourify">click</button>
+</div>
+
+
+<!-- // Javascript -->
+<script>
+  export default {
+    oncreate () {
+      console.log("Child component created");
+    },
+
+    ondestroy () {
+      console.log("Child component destroyed");
+    },
+
+    methods: {
+      colourify() {
+        var rand = this.colours[Math.floor(Math.random() * this.colours.length)];
+        this.set({ colour: colour });
+      }
+    },
+
+    data() {
+      return {
+        colour: '',
+        colours: ['red', 'blue', 'black', 'green']
+      };
+    }
+  }
+</script>

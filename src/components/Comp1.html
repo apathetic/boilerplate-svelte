@@ -1,0 +1,64 @@
+<!-- // Scoped styles -->
+<style>
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    padding-left: 16px;
+  }
+</style>
+
+
+<!--// Template -->
+<div class="cards">
+  <ul>
+  {{#each items as item}}
+    <li on:click="update(item)">
+      <button>{{ item }}</button>
+    </li>
+  {{/each}}
+  </ul>
+
+  <p>Selected: {{ selected }}</p>
+  <p>Not selected: {{ notSelected }}</p>
+</div>
+
+
+<!-- // Javascript -->
+<script>
+  import Child from './Child.html';
+
+  export default {
+    oncreate () {
+      console.log("component created");
+    },
+
+    ondestroy () {
+      console.log("component destroyed");
+    },
+
+    methods: {
+      update(item) {
+        this.set({ selected: item });
+        console.log("component data changed");
+      }
+    },
+
+    data() {
+      return {
+        items: ['fun', 'sun', 'wacky', 'yar'],
+        selected: ''
+      };
+    },
+
+    computed: {
+      notSelected: items => {
+        return items.splice(items.indexOf(item), 1);
+      }
+    },
+
+    components: {
+      Child
+    }
+  }
+</script>
